@@ -8,7 +8,6 @@ public class Health : MonoBehaviour
     private float _currentValue;
 
     public event Action DamageTaken;
-    public event Action LifeEnded;
     public event Action HealthRecovered;
 
     public float CurrentValue => _currentValue;
@@ -20,9 +19,6 @@ public class Health : MonoBehaviour
     {
         _currentValue = Mathf.Clamp(_currentValue - damage, 0, _maxValue);
         DamageTaken?.Invoke();
-
-        if (_currentValue <= 0)
-            LifeEnded?.Invoke();
     }
 
     public void Recover(float health)

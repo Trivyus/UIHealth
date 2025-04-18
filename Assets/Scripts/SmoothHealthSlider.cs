@@ -1,44 +1,19 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthUI : MonoBehaviour
+public class SmoothHealthSlider : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private TMP_Text _healthText;
-    [SerializeField] private Slider _healthSlider;
     [SerializeField] private Slider _smoothHealthSlider;
     [SerializeField] private float _smoothSpeed = 5f;
+    [SerializeField] private float _smoothLimitTime = 1f;
 
     private Coroutine _smoothSliderCoroutine;
 
     private void Start()
     {
-        InitializeHealthDisplay();
-        InitializeHealthSlider();
         InitializeSmoothHealthSlider();
-    }
-
-    private void InitializeHealthDisplay()
-    {
-        if (_healthText != null)
-        {
-            UpdateHealthDisplay();
-            _health.DamageTaken += UpdateHealthDisplay;
-            _health.HealthRecovered += UpdateHealthDisplay;
-        }
-    }
-
-    private void InitializeHealthSlider()
-    {
-        if (_healthSlider != null)
-        {
-            _healthSlider.maxValue = _health.MaxValue;
-            UpdateHealthSlider();
-            _health.DamageTaken += UpdateHealthSlider;
-            _health.HealthRecovered += UpdateHealthSlider;
-        }
     }
 
     private void InitializeSmoothHealthSlider()
@@ -50,16 +25,6 @@ public class HealthUI : MonoBehaviour
             _health.DamageTaken += SmoothHealthSliderUpdate;
             _health.HealthRecovered += SmoothHealthSliderUpdate;
         }
-    }
-
-    private void UpdateHealthDisplay()
-    {
-        _healthText.text = $"{_health.CurrentValue}/{_health.MaxValue}";
-    }
-
-    private void UpdateHealthSlider()
-    {
-        _healthSlider.value = _health.CurrentValue;
     }
 
     private void SmoothHealthSliderUpdate()
@@ -76,7 +41,7 @@ public class HealthUI : MonoBehaviour
         float targetValue = _health.CurrentValue;
         float elapsedTime = 0f;
 
-        while (elapsedTime < 1f)
+        while (elapsedTime < _smoothLimitTime)
         {
             elapsedTime += Time.deltaTime * _smoothSpeed;
             _smoothHealthSlider.value = Mathf.Lerp(startValue, targetValue, elapsedTime);
@@ -88,18 +53,6 @@ public class HealthUI : MonoBehaviour
 
     private void OnDisable()
     {
-        if (_healthText != null)
-        {
-            _health.DamageTaken -= UpdateHealthDisplay;
-            _health.HealthRecovered -= UpdateHealthDisplay;
-        }
-
-        if (_healthSlider != null)
-        {
-            _health.DamageTaken -= UpdateHealthSlider;
-            _health.HealthRecovered -= UpdateHealthSlider;
-        }
-
         if (_smoothHealthSlider != null)
         {
             _health.DamageTaken -= SmoothHealthSliderUpdate;
