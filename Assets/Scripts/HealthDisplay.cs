@@ -1,37 +1,22 @@
 using TMPro;
 using UnityEngine;
 
-public class HealthDisplay : MonoBehaviour
+public class HealthDisplay : HealthUIBase
 {
-    [SerializeField] private Health _health;
     [SerializeField] private TMP_Text _healthText;
 
-    private void Start()
+    protected override void Initialize()
     {
-        InitializeHealthDisplay();
+        UpdateHealthDisplay();
     }
 
-    private void InitializeHealthDisplay()
+    protected override void OnHealthChangedUpdate()
     {
-        if (_healthText != null)
-        {
-            UpdateHealthDisplay();
-            _health.DamageTaken += UpdateHealthDisplay;
-            _health.HealthRecovered += UpdateHealthDisplay;
-        }
+        UpdateHealthDisplay();
     }
 
     private void UpdateHealthDisplay()
     {
         _healthText.text = $"{_health.CurrentValue}/{_health.MaxValue}";
-    }
-
-    private void OnDisable()
-    {
-        if (_healthText != null)
-        {
-            _health.DamageTaken -= UpdateHealthDisplay;
-            _health.HealthRecovered -= UpdateHealthDisplay;
-        }
     }
 }

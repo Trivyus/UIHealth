@@ -2,32 +2,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SmoothHealthSlider : MonoBehaviour
+public class SmoothHealthSlider : HealthUIBase
 {
-    [SerializeField] private Health _health;
     [SerializeField] private Slider _smoothHealthSlider;
     [SerializeField] private float _smoothSpeed = 5f;
     [SerializeField] private float _smoothLimitTime = 1f;
 
     private Coroutine _smoothSliderCoroutine;
 
-    private void Start()
+    protected override void Initialize()
     {
-        InitializeSmoothHealthSlider();
+        _smoothHealthSlider.maxValue = _health.MaxValue;
+        _smoothHealthSlider.value = _health.CurrentValue;
     }
 
-    private void InitializeSmoothHealthSlider()
-    {
-        if (_smoothHealthSlider != null)
-        {
-            _smoothHealthSlider.maxValue = _health.MaxValue;
-            _smoothHealthSlider.value = _health.CurrentValue;
-            _health.DamageTaken += SmoothHealthSliderUpdate;
-            _health.HealthRecovered += SmoothHealthSliderUpdate;
-        }
-    }
-
-    private void SmoothHealthSliderUpdate()
+    protected override void OnHealthChangedUpdate()
     {
         if (_smoothSliderCoroutine != null)
             StopCoroutine(_smoothSliderCoroutine);
@@ -49,14 +38,5 @@ public class SmoothHealthSlider : MonoBehaviour
         }
 
         _smoothHealthSlider.value = targetValue;
-    }
-
-    private void OnDisable()
-    {
-        if (_smoothHealthSlider != null)
-        {
-            _health.DamageTaken -= SmoothHealthSliderUpdate;
-            _health.HealthRecovered -= SmoothHealthSliderUpdate;
-        }
     }
 }
