@@ -585,9 +585,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd70b582b16cdf4d8ad00cd8b821fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 518541650}
-  _health: {fileID: 1755449399}
-  _amount: 30
+  Button: {fileID: 518541650}
+  Health: {fileID: 1755449399}
+  Amount: 30
 --- !u!1 &524915197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,9 +1128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dd5933833f0cc4ca86dcca19ea4f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 1718818321}
-  _health: {fileID: 1755449399}
-  _amount: 30
+  Button: {fileID: 1718818321}
+  Health: {fileID: 1755449399}
+  Amount: 30
 --- !u!1 &1755449398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 1755449399}
-  _healthSlider: {fileID: 436952079}
+  _slider: {fileID: 436952079}
 --- !u!114 &1755449403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 1755449399}
-  _healthText: {fileID: 1828991523}
+  _displayText: {fileID: 1828991523}
 --- !u!1 &1828991522
 GameObject:
   m_ObjectHideFlags: 0
