@@ -3,21 +3,21 @@ using UnityEngine.UI;
 
 public class HealthSlider : HealthUIBase
 {
-    [SerializeField] private Slider _healthSlider;
+    [SerializeField] private Slider _slider;
 
     protected override void Initialize()
     {
-        _healthSlider.maxValue = _health.MaxValue;
-        UpdateHealthSlider();
+        _slider.maxValue = _health.MaxValue;
+        UpdateSliderValue();
     }
 
-    protected override void OnHealthChangedUpdate()
+    protected override void OnValueChangedUpdate()
     {
-        UpdateHealthSlider();
+        UpdateSliderValue();
     }
 
-    private void UpdateHealthSlider()
+    private void UpdateSliderValue()
     {
-        _healthSlider.value = _health.CurrentValue;
+        _slider.value = _health.CurrentValue;
     }
 }

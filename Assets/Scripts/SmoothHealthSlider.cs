@@ -16,7 +16,7 @@ public class SmoothHealthSlider : HealthUIBase
         _smoothHealthSlider.value = _health.CurrentValue;
     }
 
-    protected override void OnHealthChangedUpdate()
+    protected override void OnValueChangedUpdate()
     {
         if (_smoothSliderCoroutine != null)
             StopCoroutine(_smoothSliderCoroutine);

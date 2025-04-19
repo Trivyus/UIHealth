@@ -3,24 +3,18 @@ using UnityEngine.UI;
 
 public abstract class HealthButtonBase : MonoBehaviour
 {
-    [SerializeField] protected Button _button;
-    [SerializeField] protected Health _health;
-    [SerializeField] protected float _amount;
+    [SerializeField] protected Button Button;
+    [SerializeField] protected Health Health;
+    [SerializeField] protected float Amount;
 
     protected virtual void OnEnable()
     {
-        if (_button != null)
-        {
-            _button.onClick.AddListener(OnButtonClicked);
-        }
+        Button.onClick.AddListener(OnButtonClicked);
     }
 
     protected virtual void OnDisable()
     {
-        if (_button != null)
-        {
-            _button.onClick.RemoveListener(OnButtonClicked);
-        }
+        Button.onClick.RemoveListener(OnButtonClicked);
     }
 
     protected abstract void OnButtonClicked();

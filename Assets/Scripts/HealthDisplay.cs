@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class HealthDisplay : HealthUIBase
 {
-    [SerializeField] private TMP_Text _healthText;
+    [SerializeField] private TMP_Text _displayText;
 
     protected override void Initialize()
     {
-        UpdateHealthDisplay();
+        UpdateText();
     }
 
-    protected override void OnHealthChangedUpdate()
+    protected override void OnValueChangedUpdate()
     {
-        UpdateHealthDisplay();
+        UpdateText();
     }
 
-    private void UpdateHealthDisplay()
+    private void UpdateText()
     {
-        _healthText.text = $"{_health.CurrentValue}/{_health.MaxValue}";
+        _displayText.text = $"{_health.CurrentValue}/{_health.MaxValue}";
     }
 }

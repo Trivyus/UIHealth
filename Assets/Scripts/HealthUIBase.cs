@@ -6,23 +6,17 @@ public abstract class HealthUIBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        if (_health != null)
-        {
-            Initialize();
-            _health.DamageTaken += OnHealthChangedUpdate;
-            _health.HealthRecovered += OnHealthChangedUpdate;
-        }
+        Initialize();
+        _health.DamageTaken += OnValueChangedUpdate;
+        _health.Recovered += OnValueChangedUpdate;
     }
 
     protected virtual void OnDisable()
     {
-        if (_health != null)
-        {
-            _health.DamageTaken -= OnHealthChangedUpdate;
-            _health.HealthRecovered -= OnHealthChangedUpdate;
-        }
+        _health.DamageTaken -= OnValueChangedUpdate;
+        _health.Recovered -= OnValueChangedUpdate;
     }
 
     protected abstract void Initialize();
-    protected abstract void OnHealthChangedUpdate();
+    protected abstract void OnValueChangedUpdate();
 }
